@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-10 offset-1 text-center" *ngIf="isSuccess == true">
+        <div class="alert alert-success" role="alert">
+            <h2>Your account now is active</h2>
+            <h3>Click button below to login</h3>
+            <button mat-raised-button>Login</button>
+        </div>
+    </div>
+    <div class="col-md-10 offset-1 text-center" *ngIf="isSuccess == false">
+        <div class="alert alert-danger" role="alert">
+            <h2>Bad verification token</h2>
+        </div>
+    </div>
+    <div class="col-md-2 offset-5 text-center" *ngIf="isSuccess==null">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+</div>

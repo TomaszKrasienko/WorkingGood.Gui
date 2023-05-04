@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+    <div fxHide.gt-xs>
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <a routerLink="/">Home</a>
+    </div>
+    <span class="example-spacer"></span>
+    <div *ngIf="isUserLogin(); else userNotLogged">
+      <button mat-mini-fab color="primary" [matMenuTriggerFor]="loggedMenu">
+        <mat-icon>perm_identity</mat-icon>
+      </button>
+      <mat-menu #loggedMenu>
+        <button mat-menu-item (click)="logOut()">Log out</button>
+      </mat-menu>
+    </div>
+    <ng-template #userNotLogged>
+      <button mat-mini-fab color="primary" [matMenuTriggerFor]="notLoggedMenu">
+        <mat-icon>perm_identity</mat-icon>
+      </button>
+      <mat-menu #notLoggedMenu>
+        <button mat-menu-item (click)="redirectToLogin()">Log in</button>
+        <button mat-menu-item (click)="redirectToRegister()">Register company</button>
+      </mat-menu>
+    </ng-template>
+  </mat-toolbar>

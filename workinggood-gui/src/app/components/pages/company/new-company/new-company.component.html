@@ -1,0 +1,15 @@
+<div class="col-md-10 offset-1 text-center">
+    <h1>Add new company</h1>
+    <form (submit)="getAddCompany()" #registerCompany="ngForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Company name</mat-label>
+            <input
+                matInput
+                placeholder="Company name"
+                name="name"
+                [formControl]="companyNameFormControl"
+                [(ngModel)]="addCompany.name"
+                (keyup)="isFormValid()"/>
+        </mat-form-field>
+    </form>
+</div>

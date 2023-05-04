@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-10 offset-1 text-center">
+        <div *ngIf="loginError">
+          <div class="alert alert-danger alert-position alert-dismissible fade show" role="alert" *ngFor="let errorMessage of loginError">
+            {{errorMessage}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <form (submit)="submit()" #login="ngForm">
+            <div class="row">
+                <div class="col-md-4 offset-4">
+                    <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Email address</mat-label>
+                      <input
+                        matInput
+                        placeholder="Email address"
+                        name="email"
+                        [formControl]="emailFormControl"
+                        [(ngModel)]="loginCredentials.email"/>
+                      <mat-error
+                        *ngIf="emailFormControl.invalid && (emailFormControl.dirty || emailFormControl.touched)">
+                        {{getEmailErrorMessage()}}
+                      </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 offset-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input
+                        matInput
+                        placeholder="Password"
+                        name="password"
+                        type="password"
+                        [formControl]="passwordFormControl"
+                        [(ngModel)]="loginCredentials.password"/>
+                        <mat-error
+                          *ngIf="passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched)">
+                          {{getPasswordErrorMessage()}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+          <button type="submit" mat-mini-fab color="primary">
+            <mat-icon>done</mat-icon>
+          </button>
+        </form>
+    </div>
+</div>

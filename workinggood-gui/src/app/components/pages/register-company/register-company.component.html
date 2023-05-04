@@ -1,0 +1,25 @@
+<div class="col-md-10 offset-1 text-center">
+    <h1>Register new company</h1>
+    <div class="col-md-10 offset-1">
+        <mat-stepper [linear]="isLinear" #stepper>
+          <mat-step [stepControl]="firstFormGroup" label="Add new employee">
+            <form [formGroup]="firstFormGroup">
+              <app-new-company (companyValidation)="isCompanyValid($event)"></app-new-company>
+              <div>
+                <button mat-button matStepperNext [disabled]="!companyValidator">Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+            <form [formGroup]="secondFormGroup">
+              <app-new-employee (employeeValidation)="isEmployeeValid($event)"></app-new-employee>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button [disabled]="!employeeValidator" (click)="registerCompany()">Save</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+              </div>
+            </form>
+          </mat-step>
+        </mat-stepper>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.width-100{
+    width: 100%;
+}
+.alert-position{
+  position: fixed;
+  right: 25px;
+  top: 25px;
+}
