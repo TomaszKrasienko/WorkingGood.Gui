@@ -2,56 +2,37 @@
     <a mat-list-item routerLink="/main" (click)="onSidenavClose()">
       <mat-icon>home</mat-icon><span class="nav-caption">Home</span>
     </a>
-    <mat-list-item [matMenuTriggerFor]="companiesMenu">
-      <mat-icon>touch_app</mat-icon>
-      <a matLine>Companies</a>
-    </mat-list-item>
-    <mat-menu #companiesMenu="matMenu">
-      <button mat-menu-item routerLink="/addCompany" (click)="onSidenavClose()">
-        <mat-icon>add</mat-icon>
-        <span>Add new company</span>
-      </button>
-      <button mat-menu-item routerLink="/addEmployee" (click)="onSidenavClose()">
-        <mat-icon>add</mat-icon>
-        <span>Add new employee</span>
-      </button>
-      <button mat-menu-item routerLink="/registerCompany" (click)="onSidenavClose()">
-        <mat-icon>add</mat-icon>
-        <span>Register company</span>
-      </button>
-      <button mat-menu-item routerLink="/orders" (click)="onSidenavClose()">
-        <mat-icon>view_list</mat-icon>
-        <span>Companies list</span>
-      </button>
-    </mat-menu>
-    <mat-list-item [matMenuTriggerFor]="productsMenu">
-      <mat-icon>folder_open</mat-icon>
-      <a matLine>Products</a>
-    </mat-list-item>
-    <mat-menu #productsMenu="matMenu">
-      <button mat-menu-item routerLink="/products" (click)="onSidenavClose()">
-        <mat-icon>view_list</mat-icon>
-        <span>Product list</span>
-      </button>
-      <button mat-menu-item routerLink="/addProduct" (click)="onSidenavClose()">
-        <mat-icon>add</mat-icon>
-        <span>Add new product</span>
-      </button>
-    </mat-menu>
-  
-    <mat-list-item [matMenuTriggerFor]="clientsMenu">
-      <mat-icon>contacts</mat-icon>
-      <a matLine>Clients</a>
-    </mat-list-item>
-    <mat-menu #clientsMenu="matMenu">
-      <button mat-menu-item routerLink="/clients" (click)="onSidenavClose()">
-        <mat-icon>view_list</mat-icon>
-        <span>Clients list</span>
-      </button>
-      <button mat-menu-item routerLink="/addClient" (click)="onSidenavClose()">
-        <mat-icon>add</mat-icon>
-        <span>Add new client</span>
-      </button>
-    </mat-menu>
-  
+    <ng-container *ngIf="!isEmployeeLogin">
+      <mat-list-item [matMenuTriggerFor]="companiesMenu">
+        <mat-icon>touch_app</mat-icon>
+        <a matLine>Companies</a>
+      </mat-list-item>
+      <mat-menu #companiesMenu="matMenu">
+        <button mat-menu-item routerLink="/registerCompany" (click)="onSidenavClose()">
+          <mat-icon>add</mat-icon>
+          <span>Register company</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+
+    <ng-container *ngIf="isEmployeeLogin">
+      <mat-list-item [matMenuTriggerFor]="offersMenu">
+        <mat-icon>description</mat-icon>
+        <a matLine>Offers</a>
+      </mat-list-item>
+      <mat-menu #offersMenu="matMenu">
+        <button mat-menu-item routerLink="/addOffer" (click)="onSidenavClose()">
+          <mat-icon>add</mat-icon>
+          <span>Add offer</span>
+        </button>
+        <button mat-menu-item routerLink="/addProduct" (click)="onSidenavClose()">
+          <mat-icon>view_list</mat-icon>
+          <span>Company offers</span>
+        </button>
+        <button mat-menu-item routerLink="/addProduct" (click)="onSidenavClose()">
+          <mat-icon>assignment_ind</mat-icon>
+          <span>My offers</span>
+        </button>
+      </mat-menu>
+    </ng-container>
   </mat-nav-list>

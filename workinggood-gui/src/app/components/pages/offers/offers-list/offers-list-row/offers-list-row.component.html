@@ -1,0 +1,23 @@
+<div class="col-md-12">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{offer?.title}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-8">
+          <b>Pozycja: </b>{{offer?.positionType}}<br>
+          {{offer?.description}}
+        </div>
+        <div class="col-md-4 text-end salary-text">
+          {{offer?.salaryRangeMin}} - {{offer?.salaryRangeMax}} PLN
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button>APPLY</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

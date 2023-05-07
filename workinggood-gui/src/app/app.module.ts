@@ -26,6 +26,12 @@ import { LoginEmployeeComponent } from './components/pages/employeeAuth/login-em
 import { AuthInterceptor } from './components/services/interceptors/auth.interceptor';
 import { GetAllForCompanyComponent } from './components/pages/offers/get-all-for-company/get-all-for-company.component';
 import {ErrorInterceptor} from "./components/services/interceptors/error.interceptor";
+import { AddOfferComponent } from './components/pages/offers/add-offer/add-offer.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { OfferDetailsComponent } from './components/pages/offers/offer-details/offer-details.component';
+import { OffersListComponent } from './components/pages/offers/offers-list/offers-list.component';
+import { OffersListRowComponent } from './components/pages/offers/offers-list/offers-list-row/offers-list-row.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -38,7 +44,11 @@ import {ErrorInterceptor} from "./components/services/interceptors/error.interce
     AfterRegisterComponent,
     VerifyEmployeeComponent,
     LoginEmployeeComponent,
-    GetAllForCompanyComponent
+    GetAllForCompanyComponent,
+    AddOfferComponent,
+    OfferDetailsComponent,
+    OffersListComponent,
+    OffersListRowComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +66,9 @@ import {ErrorInterceptor} from "./components/services/interceptors/error.interce
     MatSidenavModule,
     MatButtonModule,
     MatStepperModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatCardModule
   ],
   // providers: [],
   providers: [

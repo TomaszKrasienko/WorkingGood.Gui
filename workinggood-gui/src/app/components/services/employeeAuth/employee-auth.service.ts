@@ -18,7 +18,7 @@ export class EmployeeAuthService {
       .pipe(
         map((result: BaseReponse) => {
           let loginResponse: LoginResponse = result.object;
-          this.setUserDate(new UserDataStorage(
+          this.setUserData(new UserDataStorage(
             loginResponse.token,
             loginResponse.refreshToken,
             loginCredentials.email
@@ -27,17 +27,37 @@ export class EmployeeAuthService {
         })
       )
   }
-  private setUserDate(userDataStorage: UserDataStorage){
+  private setUserData(userDataStorage: UserDataStorage): void {
     localStorage.setItem(this.USER_DATA_KEY, JSON.stringify(userDataStorage));
   }
-  logout(): void{
+  updateUserData(token: string, refreshToken: string): void {
+    let userData: UserDataStorage = JSON.parse(
+      localStorage.getItem(this.USER_DATA_KEY) as string
+    );
+    userData.token = token;
+    userData.refreshToken = refreshToken;
+    localStorage.setItem(this.USER_DATA_KEY, JSON.stringify(userData));
+  }
+  logout(): void {
    localStorage.removeItem(this.USER_DATA_KEY);
   }
-  getUserEmail(): string{
+  getUserEmail(): string {
     let userData: UserDataStorage = JSON.parse(
       localStorage.getItem(this.USER_DATA_KEY) as string
     );
     return userData.emailAddress;
+  }
+  getRefreshToken(): string {
+    let userData: UserDataStorage = JSON.parse(
+      localStorage.getItem(this.USER_DATA_KEY) as string
+    );
+    return userData.refreshToken;
+  }
+  getToken(): string{
+    let userData: UserDataStorage = JSON.parse(
+      localStorage.getItem(this.USER_DATA_KEY) as string
+    );
+    return userData?.token;
   }
   isUserLogin():boolean{
     let data = localStorage.getItem(this.USER_DATA_KEY);

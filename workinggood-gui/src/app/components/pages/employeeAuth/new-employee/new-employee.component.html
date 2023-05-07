@@ -1,5 +1,5 @@
 <div class="col-md-10 offset-1 text-center">
-    <div *ngIf="addEmployeeError">
+    <div *ngIf="isError">
       <div class="alert alert-danger alert-position alert-dismissible fade show" role="alert" *ngFor="let errorMessage of addEmployeeError">
         {{errorMessage}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

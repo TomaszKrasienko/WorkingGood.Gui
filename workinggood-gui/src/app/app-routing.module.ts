@@ -7,6 +7,9 @@ import { AfterRegisterComponent } from './components/pages/register-company/afte
 import { VerifyEmployeeComponent } from './components/pages/employeeAuth/verify-employee/verify-employee.component';
 import { LoginEmployeeComponent } from './components/pages/employeeAuth/login-employee/login-employee.component';
 import {GetAllForCompanyComponent} from "./components/pages/offers/get-all-for-company/get-all-for-company.component";
+import {AddOfferComponent} from "./components/pages/offers/add-offer/add-offer.component";
+import {OfferDetailsComponent} from "./components/pages/offers/offer-details/offer-details.component";
+import {OffersListComponent} from "./components/pages/offers/offers-list/offers-list.component";
 
 const routes: Routes = [
   {path:"addCompany", component:NewCompanyComponent},
@@ -15,6 +18,9 @@ const routes: Routes = [
   {path:"login", component: LoginEmployeeComponent},
   {path:"registerCompany", component:RegisterCompanyComponent},
   {path:"afterRegister", component: AfterRegisterComponent},
+  {path:"addOffer", component: AddOfferComponent},
+  {path:"offersList", component: OffersListComponent},
+  {path:"offer/:id", component: OfferDetailsComponent},
   {path:"offers", component: GetAllForCompanyComponent}
 ];
 

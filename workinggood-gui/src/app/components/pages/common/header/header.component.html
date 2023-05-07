@@ -5,12 +5,15 @@
       </button>
     </div>
     <div>
-      <a routerLink="/">Home</a>
+      <a routerLink="/" class="main-header-button">Home</a>
+    </div>
+    <div>
+      <a routerLink="/offersList">Offers</a>
     </div>
     <span class="example-spacer"></span>
     <div *ngIf="isUserLogin(); else userNotLogged">
       <button mat-mini-fab color="primary" [matMenuTriggerFor]="loggedMenu">
-        <mat-icon>perm_identity</mat-icon>
+        {{userInitials}}
       </button>
       <mat-menu #loggedMenu>
         <button mat-menu-item (click)="logOut()">Log out</button>

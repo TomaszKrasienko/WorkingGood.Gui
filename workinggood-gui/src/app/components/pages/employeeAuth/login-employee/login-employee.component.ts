@@ -20,6 +20,7 @@ export class LoginEmployeeComponent implements OnInit {
     [Validators.required]
   );
   loginError: string[] = [];
+  isError: boolean = true;
   constructor(
     private employeeService: EmployeeService,
     private employeeAuthService: EmployeeAuthService,
@@ -40,6 +41,10 @@ export class LoginEmployeeComponent implements OnInit {
         },
         (error) => {
           this.loginError = error.error.errors;
+          this.isError = true;
+          setTimeout(() => {
+            this.hideError();
+          }, 3000);
         });
   }
   private markAllAsTouched(): void{
@@ -60,5 +65,9 @@ export class LoginEmployeeComponent implements OnInit {
       return 'You must enter a value'
     }
     return '';
+  }
+  hideError(): void{
+    this.isError = false;
+    this.loginError = [];
   }
 }

@@ -5,15 +5,16 @@ import { EmployeeService } from "../employee/employee.service";
 import { Refresh } from "../../models/employeeAuth/refresh";
 import { BaseReponse } from "../../models/baseResponse";
 import { Route, Router } from "@angular/router";
+import {EmployeeAuthService} from "../employeeAuth/employee-auth.service";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
     private isRefreshing: boolean = false;
     private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-    constructor(private employeeService: EmployeeService, private router: Router){
+    constructor(private employeeService: EmployeeService, private employeeAuthService: EmployeeAuthService, private router: Router){
     }
 
     intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = this.employeeService.getToken();
+        const token = this.employeeAuthService.getToken();
         if(token){
             req = this.addToken(req, token);
         }
@@ -38,11 +39,11 @@ export class AuthInterceptor implements HttpInterceptor{
         if(!this.isRefreshing) {
           this.isRefreshing = true;
           this.refreshTokenSubject.next(null);
-          return this.employeeService.refreshToken(new Refresh(this.employeeService.getRefreshToken())).pipe(
+          return this.employeeService.refreshToken(new Refresh(this.employeeAuthService.getRefreshToken())).pipe(
             switchMap((result: BaseReponse) => {
               this.isRefreshing = false;
               const objectResult = result.object;
-              this.employeeService.setToken(objectResult.token);
+              this.employeeAuthService.updateUserData(objectResult.token, objectResult.refreshToken);
               this.refreshTokenSubject.next(objectResult.refreshToken);
               return next.handle(this.addToken(request, objectResult.token));
             })
@@ -54,7 +55,7 @@ export class AuthInterceptor implements HttpInterceptor{
             filter((token) => token != null),
             take(1),
             switchMap((jwt) => {
-              return next.handle(this.addToken(request, this.employeeService.getToken()));
+              return next.handle(this.addToken(request, this.employeeAuthService.getToken()));
             })
           );
         }

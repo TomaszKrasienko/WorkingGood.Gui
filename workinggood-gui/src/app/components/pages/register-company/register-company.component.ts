@@ -56,7 +56,13 @@ export class RegisterCompanyComponent implements OnInit {
                 console.log(result);
                 this.router.navigate(['/afterRegister']);
               },
-              error => console.log(error)
+              error => {
+                this.newEmployeeComponent.isError = true;
+                this.newEmployeeComponent.addEmployeeError = error.error.errors;
+                setTimeout(() => {
+                  this.newEmployeeComponent.hideError();
+                }, 3000);
+              }
             );
         },
         error => console.log(error));

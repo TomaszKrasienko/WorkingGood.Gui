@@ -10,6 +10,7 @@ import {AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators}
 export class NewEmployeeComponent implements OnInit {
   addEmployee:Partial<AddEmployee> = {};
   addEmployeeError: string[] = [];
+  isError: boolean = false;
   @Output() employeeValidation = new EventEmitter<boolean>();
   emailFormControl = new FormControl(
     '',
@@ -59,6 +60,10 @@ export class NewEmployeeComponent implements OnInit {
       this.employeeValidation.emit(true);
     else
       this.employeeValidation.emit(false);
+  }
+  hideError(): void{
+    this.isError = false;
+    this.addEmployeeError = [];
   }
 }
 //Todo: dorobić walidator do hasła
