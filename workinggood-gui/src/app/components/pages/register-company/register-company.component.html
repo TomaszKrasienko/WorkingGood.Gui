@@ -3,7 +3,7 @@
     <div class="col-md-10 offset-1">
         <mat-stepper [linear]="isLinear" #stepper>
           <mat-step [stepControl]="firstFormGroup" label="Add new employee">
-            <form [formGroup]="firstFormGroup">
+            <form>
               <app-new-company (companyValidation)="isCompanyValid($event)"></app-new-company>
               <div>
                 <button mat-button matStepperNext [disabled]="!companyValidator">Next</button>

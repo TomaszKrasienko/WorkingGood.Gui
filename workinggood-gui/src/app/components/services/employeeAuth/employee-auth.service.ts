@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {Login, LoginResponse} from "../../models/employeeAuth/login";
 import {BaseReponse} from "../../models/baseResponse";
 import {UserDataStorage} from "../../models/employeeAuth/userDataStorage";
+import {AddEmployee} from "../../models/employee/addEmployee.Request";
+import {Refresh} from "../../models/employeeAuth/refresh";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeAuthService {
-  //url: string= 'http://localhost:30010/employeesAuth';
-  url:string = 'https://localhost:7205/employeesAuth';
+  private employeeAuthUrl:string = `${environment.API_URL}/employeesAuth`;
   private USER_DATA_KEY: string = 'userData';
   constructor(private httpClient: HttpClient) { }
   login(loginCredentials: Login):Observable<any>{
-    return this.httpClient.post<BaseReponse>(this.url+'/login', loginCredentials)
+    return this.httpClient.post<BaseReponse>(this.employeeAuthUrl+'/login', loginCredentials)
       .pipe(
         map((result: BaseReponse) => {
           let loginResponse: LoginResponse = result.object;
@@ -26,6 +28,15 @@ export class EmployeeAuthService {
           return result;
         })
       )
+  }
+  registerEmployee(addEmployee: AddEmployee, companyId: string): Observable<any>{
+    return this.httpClient.post(this.employeeAuthUrl+'/registerEmployee/'+companyId, addEmployee).pipe(tap(console.log));
+  }
+  verifyEmployee(verificationToken: string): Observable<any>{
+    return this.httpClient.post(this.employeeAuthUrl+'/verifyEmployee/'+verificationToken, null).pipe(tap(console.log));
+  }
+  refreshToken(refreshToken: Refresh): Observable<any>{
+    return this.httpClient.post(this.employeeAuthUrl + '/refresh', refreshToken).pipe(tap(console.log));
   }
   private setUserData(userDataStorage: UserDataStorage): void {
     localStorage.setItem(this.USER_DATA_KEY, JSON.stringify(userDataStorage));
@@ -65,4 +76,7 @@ export class EmployeeAuthService {
       return false;
     return true;
   }
+
+
+
 }

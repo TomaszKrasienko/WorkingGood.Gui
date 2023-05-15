@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-12 text-center">
+    <mat-form-field appearance="outline" class="width-100">
+      <mat-label>Search phrase</mat-label>
+      <input matInput placeholder="Search phrase" type="Text" [(ngModel)]="searchPhrase">
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Is Active</mat-label>
+      <mat-select [(value)]="isActive">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let answers of isActiveAnswers" [value]="answers">
+          {{answers}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div class="col-md-12 text-center">
+  <section class="example-section">
+    <mat-checkbox class="example-margin" [(ngModel)]="onlyMine">Only mine</mat-checkbox>
+  </section>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <mat-form-field appearance="outline" class="width-100">
+      <mat-label>From</mat-label>
+      <input matInput placeholder="From" type="Number" [(ngModel)]="rateFrom">
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field appearance="outline" class="width-100">
+      <mat-label>To</mat-label>
+      <input matInput placeholder="To" type="Number" [(ngModel)]="rateTo">
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <button mat-button color="primary" (click)="filter()">Filter</button>
+  </div>
+</div>

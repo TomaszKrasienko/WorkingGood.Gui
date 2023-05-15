@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-10 offset-1 text-center">
+    <h2>Add application for offer {{offerTitle}}</h2>
+    <form (submit)="submit()" #addNewApplication="ngForm">
+      <div class="row">
+        <div class="col-md-4 text-start">
+          <mat-form-field class="form-field width-90" appearance="outline">
+            <mat-label>First name</mat-label>
+            <input
+              matInput
+              placeholder="First name"
+              name="candidateFirstName"
+              [(ngModel)]="addApplication.candidateFirstName"/>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 text-start">
+          <mat-form-field class="form-field width-90" appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input
+              matInput
+              placeholder="Last name"
+              name="candidateLastName"
+              [(ngModel)]="addApplication.candidateLastName"/>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 text-start">
+          <mat-form-field class="form-field width-90" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="Email"
+              name="candidateEmail"
+              [(ngModel)]="addApplication.candidateEmail"/>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-start">
+            <p>Place when you can write some words about you</p>
+            <mat-form-field class="form-field width-90" appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea
+                matInput
+                placeholder="Description"
+                name="description"
+                rows="3"
+                [(ngModel)]="addApplication.description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <mat-card class="input-container">
+            <button #file mat-flat-button color="primary">File
+              <input multiple (change)="onFileSelected($event)" style="opacity: 0; position:absolute; left:0px; top:0px; width:100%; height:100%;" type="file"/>
+            </button>
+            <div *ngFor="let file of filesExample">
+              <span>{{file.name}}</span>
+              <button mat-icon-button
+                      color="primary"
+                      (click)="removeFile($event,file)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </mat-card>
+        </div>
+        <div class="row">
+          <div class="col-md-10 offset-1 text-md-end">
+            <button type="submit" mat-mini-fab color="primary">
+              <mat-icon>done</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

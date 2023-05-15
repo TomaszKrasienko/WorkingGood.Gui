@@ -1,3 +1,22 @@
 <div class="col-md-8 offset-2">
-  <app-offers-list-row></app-offers-list-row>
+  <div *ngIf="offersList?.length !== 0; else noOffers">
+    <div class="row">
+      <ng-container *ngFor="let offer of offersList">
+        <app-offers-list-row [offer]="offer"></app-offers-list-row>
+      </ng-container>
+    </div>
+    <div class="row">
+      <mat-paginator #paginator
+        (page)="handlePageEvent($event)"
+        [length]=length
+        [pageSize]=pageSize
+        [pageSizeOptions]="[5, 10, 15, 20]"
+        [pageIndex]="pageIndex"
+      aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+  <ng-template #noOffers>
+    <app-offers-list-empty></app-offers-list-empty>
+  </ng-template>
 </div>

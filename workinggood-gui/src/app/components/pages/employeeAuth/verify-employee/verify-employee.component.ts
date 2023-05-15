@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BaseReponse } from 'src/app/components/models/baseResponse';
-import { EmployeeService } from 'src/app/components/services/employee/employee.service';
+import {EmployeeAuthService} from "../../../services/employeeAuth/employee-auth.service";
 
 @Component({
   selector: 'app-verify-employee',
@@ -14,14 +14,14 @@ export class VerifyEmployeeComponent implements OnInit {
   veriificationToken: string = '';
   activatedRouteSubscription?: Subscription;
 
-  constructor(private employeeServivce: EmployeeService, private activatedRoute: ActivatedRoute) { }
+  constructor(private employeeAuthService: EmployeeAuthService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe(params => {
       this.veriificationToken = params['token'];
     });
     console.log(this.veriificationToken)
-    this.employeeServivce.verifyEmployee(this.veriificationToken)
+    this.employeeAuthService.verifyEmployee(this.veriificationToken)
       .subscribe(
         (result: BaseReponse) => {
           this.isSuccess = true
@@ -31,5 +31,7 @@ export class VerifyEmployeeComponent implements OnInit {
           this.isSuccess = false
         });
   }
-
+  redirectToLogin(): void {
+    this.router.navigate(['/login'])
+  }
 }

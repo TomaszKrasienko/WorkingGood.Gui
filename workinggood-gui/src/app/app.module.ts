@@ -24,7 +24,7 @@ import { AfterRegisterComponent } from './components/pages/register-company/afte
 import { VerifyEmployeeComponent } from './components/pages/employeeAuth/verify-employee/verify-employee.component';
 import { LoginEmployeeComponent } from './components/pages/employeeAuth/login-employee/login-employee.component';
 import { AuthInterceptor } from './components/services/interceptors/auth.interceptor';
-import { GetAllForCompanyComponent } from './components/pages/offers/get-all-for-company/get-all-for-company.component';
+import { OffersListForCompany } from './components/pages/offers/offers-list-for-company/offers-list-for-company';
 import {ErrorInterceptor} from "./components/services/interceptors/error.interceptor";
 import { AddOfferComponent } from './components/pages/offers/add-offer/add-offer.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
@@ -32,6 +32,16 @@ import { OfferDetailsComponent } from './components/pages/offers/offer-details/o
 import { OffersListComponent } from './components/pages/offers/offers-list/offers-list.component';
 import { OffersListRowComponent } from './components/pages/offers/offers-list/offers-list-row/offers-list-row.component';
 import {MatCardModule} from "@angular/material/card";
+import { AddApplicationComponent } from './components/pages/applications/add-application/add-application.component';
+import { ApplicationsListComponent } from './components/pages/applications/applications-list/applications-list.component';
+import { ApplicationsListRowComponent } from './components/pages/applications/applications-list/applications-list-row/applications-list-row.component';
+import { OffersListEmptyComponent } from './components/pages/offers/offers-list/offers-list-empty/offers-list-empty.component';
+import { OffersListForCompanyRow } from './components/pages/offers/offers-list-for-company/offers-list-for-company-row/offers-list-for-company-row';
+import { OffersListForCompanyEmpty } from './components/pages/offers/offers-list-for-company/offers-list-for-company-empty/offers-list-for-company-empty';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { OffersListForCompanyFiltersComponent } from './components/pages/offers/offers-list-for-company/offers-list-for-company-filters/offers-list-for-company-filters.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -44,11 +54,18 @@ import {MatCardModule} from "@angular/material/card";
     AfterRegisterComponent,
     VerifyEmployeeComponent,
     LoginEmployeeComponent,
-    GetAllForCompanyComponent,
+    OffersListForCompany,
     AddOfferComponent,
     OfferDetailsComponent,
     OffersListComponent,
-    OffersListRowComponent
+    OffersListRowComponent,
+    AddApplicationComponent,
+    ApplicationsListComponent,
+    ApplicationsListRowComponent,
+    OffersListEmptyComponent,
+    OffersListForCompanyRow,
+    OffersListForCompanyEmpty,
+    OffersListForCompanyFiltersComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +85,10 @@ import {MatCardModule} from "@angular/material/card";
     MatStepperModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   // providers: [],
   providers: [

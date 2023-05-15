@@ -6,9 +6,9 @@ import { NewCompanyComponent } from '../company/new-company/new-company.componen
 import { AddCompany } from '../../models/company/addCompany.Request';
 import { Company } from '../../models/company/company';
 import { CompanyService } from '../../services/company/company.service';
-import { EmployeeService } from '../../services/employee/employee.service';
 import { BaseReponse } from '../../models/baseResponse';
 import { Router } from '@angular/router';
+import {EmployeeAuthService} from "../../services/employeeAuth/employee-auth.service";
 
 @Component({
   selector: 'app-register-company',
@@ -22,6 +22,7 @@ export class RegisterCompanyComponent implements OnInit {
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
+  isLinear = true;
   companyValidator: boolean = false;
   employeeValidator: boolean = false;
 
@@ -29,15 +30,26 @@ export class RegisterCompanyComponent implements OnInit {
   addCompany: AddCompany;
   @ViewChild(NewEmployeeComponent) newEmployeeComponent: NewEmployeeComponent;
   @ViewChild(NewCompanyComponent) newCompanyComponent: NewCompanyComponent;
-  isLinear = false;
   constructor(
     private _formBuilder: FormBuilder,
     private companyService: CompanyService,
-    private employeeService: EmployeeService,
+    private employeeAuthService: EmployeeAuthService,
     private router: Router) { }
   ngOnInit(): void {
   }
+
+
   isCompanyValid(result: boolean):  void {
+    if(result == true) {
+      this.firstFormGroup = this._formBuilder.group({});
+      console.log(this.firstFormGroup.valid)
+    }
+    else{
+      this.firstFormGroup = this._formBuilder.group({
+        firstCtrl: ['', Validators.required],
+      });
+      this.firstFormGroup.setValidators(Validators.required);
+    }
     this.companyValidator = result;
   }
   isEmployeeValid(result: boolean): void {
@@ -50,7 +62,7 @@ export class RegisterCompanyComponent implements OnInit {
         .subscribe(
           (result: BaseReponse) => {
           const companyId: string = (result.object as Company).id;
-          this.employeeService.registerEmployee(this.addEmployee, companyId)
+          this.employeeAuthService.registerEmployee(this.addEmployee, companyId)
             .subscribe(
               result => {
                 console.log(result);

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GetAllForCompanyComponent } from './get-all-for-company.component';
+import { OffersListForCompany } from './offers-list-for-company';
 
 describe('GetAllForCompanyComponent', () => {
-  let component: GetAllForCompanyComponent;
-  let fixture: ComponentFixture<GetAllForCompanyComponent>;
+  let component: OffersListForCompany;
+  let fixture: ComponentFixture<OffersListForCompany>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GetAllForCompanyComponent ]
+      declarations: [ OffersListForCompany ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GetAllForCompanyComponent);
+    fixture = TestBed.createComponent(OffersListForCompany);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

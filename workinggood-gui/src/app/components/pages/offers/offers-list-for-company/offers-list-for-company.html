@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-2 offset-1">
+    <app-offers-list-for-company-filters></app-offers-list-for-company-filters>
+  </div>
+  <div class="col-md-8">
+    <div *ngIf="offersList.length !== 0; else noOffers">
+      <ng-container *ngFor="let offer of offersList">
+        <app-offers-list-for-company-row [offer]="offer"></app-offers-list-for-company-row>
+      </ng-container>
+      <div class="row">
+        <mat-paginator #paginator
+                       (page)="handlePageEvent($event)"
+                       [length]=length
+                       [pageSize]=pageSize
+                       [pageSizeOptions]="[5, 10, 15, 20]"
+                       [pageIndex]="pageIndex"
+                       aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+    <ng-template #noOffers>
+      <app-offers-list-for-company-empty></app-offers-list-for-company-empty>
+    </ng-template>
+  </div>
+</div>

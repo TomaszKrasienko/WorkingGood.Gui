@@ -13,6 +13,7 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.isEmployeeLogin = this.employeeAuthService.isUserLogin();
+    console.log(this.isEmployeeLogin);
   }
   public onSidenavClose =() => {
     this.sidenavClose.emit();

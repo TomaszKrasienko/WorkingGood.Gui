@@ -1,16 +1,15 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import {Observable, catchError, throwError, BehaviorSubject, switchMap, take, filter} from "rxjs";
-import { EmployeeService } from "../employee/employee.service";
 import { Refresh } from "../../models/employeeAuth/refresh";
 import { BaseReponse } from "../../models/baseResponse";
-import { Route, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import {EmployeeAuthService} from "../employeeAuth/employee-auth.service";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
     private isRefreshing: boolean = false;
     private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-    constructor(private employeeService: EmployeeService, private employeeAuthService: EmployeeAuthService, private router: Router){
+    constructor(private employeeAuthService: EmployeeAuthService, private router: Router){
     }
 
     intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -39,7 +38,7 @@ export class AuthInterceptor implements HttpInterceptor{
         if(!this.isRefreshing) {
           this.isRefreshing = true;
           this.refreshTokenSubject.next(null);
-          return this.employeeService.refreshToken(new Refresh(this.employeeAuthService.getRefreshToken())).pipe(
+          return this.employeeAuthService.refreshToken(new Refresh(this.employeeAuthService.getRefreshToken())).pipe(
             switchMap((result: BaseReponse) => {
               this.isRefreshing = false;
               const objectResult = result.object;
