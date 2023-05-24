@@ -1,11 +1,15 @@
 <div class="row">
-  <div class="col-md-2 offset-1">
-    <app-offers-list-for-company-filters></app-offers-list-for-company-filters>
+  <div class="col-md-12 text-center">
+    <h1>Offers for company</h1>
+    <br>
+  </div>
+  <div class="col-md-3 text-end">
+    <app-offers-list-for-company-filters (multiParamsEventEmitter)="filterOffers($event)"></app-offers-list-for-company-filters>
   </div>
   <div class="col-md-8">
-    <div *ngIf="offersList.length !== 0; else noOffers">
+    <div *ngIf="offersList?.length !== 0; else noOffers">
       <ng-container *ngFor="let offer of offersList">
-        <app-offers-list-for-company-row [offer]="offer"></app-offers-list-for-company-row>
+        <app-offers-list-for-company-row [offer]="offer" (emitStatusChange)="refreshStatus($event)"></app-offers-list-for-company-row>
       </ng-container>
       <div class="row">
         <mat-paginator #paginator

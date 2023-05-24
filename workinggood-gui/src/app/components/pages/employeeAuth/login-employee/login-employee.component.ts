@@ -36,8 +36,10 @@ export class LoginEmployeeComponent implements OnInit {
     this.employeeAuthService.login(this.loginCredentials as Login)
       .subscribe(
         result => {
-          console.log(result);
-          this.router.navigate(['/']);
+          this.router.navigate(['/'])
+            .then(() => {
+              window.location.reload();
+            });
         },
         (error) => {
           this.loginError = error.error.errors;

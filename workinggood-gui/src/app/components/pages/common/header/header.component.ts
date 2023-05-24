@@ -30,10 +30,6 @@ export class HeaderComponent implements OnInit {
   isUserLogin(): boolean {
     return this.employeeAuthService.isUserLogin();
   }
-  getUser(): string {
-    let userEmail = this.employeeAuthService.getUserEmail();
-    return userEmail;
-  }
   redirectToLogin(): void {
     this.router.navigate(['/login']);
   }

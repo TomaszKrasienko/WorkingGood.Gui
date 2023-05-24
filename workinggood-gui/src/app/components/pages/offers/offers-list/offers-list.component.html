@@ -1,22 +1,33 @@
-<div class="col-md-8 offset-2">
-  <div *ngIf="offersList?.length !== 0; else noOffers">
-    <div class="row">
-      <ng-container *ngFor="let offer of offersList">
-        <app-offers-list-row [offer]="offer"></app-offers-list-row>
-      </ng-container>
-    </div>
-    <div class="row">
-      <mat-paginator #paginator
-        (page)="handlePageEvent($event)"
-        [length]=length
-        [pageSize]=pageSize
-        [pageSizeOptions]="[5, 10, 15, 20]"
-        [pageIndex]="pageIndex"
-      aria-label="Select page">
-      </mat-paginator>
-    </div>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h1>Offers</h1>
+    <br>
   </div>
-  <ng-template #noOffers>
-    <app-offers-list-empty></app-offers-list-empty>
-  </ng-template>
+</div>
+<div class="row">
+  <div class="col-md-3 text-end">
+    <app-offers-list-filters (multiParamsEventEmitter)="filterOffers($event)"></app-offers-list-filters>
+  </div>
+  <div class="col-md-8">
+    <div *ngIf="offersList?.length !== 0; else noOffers">
+      <div class="row">
+        <ng-container *ngFor="let offer of offersList">
+          <app-offers-list-row [offer]="offer"></app-offers-list-row>
+        </ng-container>
+      </div>
+      <div class="row">
+        <mat-paginator #paginator
+          (page)="handlePageEvent($event)"
+          [length]=length
+          [pageSize]=pageSize
+          [pageSizeOptions]="[5, 10, 15, 20]"
+          [pageIndex]="pageIndex"
+        aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+    <ng-template #noOffers>
+      <app-offers-list-empty></app-offers-list-empty>
+    </ng-template>
+  </div>
 </div>

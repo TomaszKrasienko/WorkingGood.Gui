@@ -19,7 +19,7 @@ export class OfferDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe(params =>{
       this.offerId = params['id'];
-    })
+  })
     this.offerService.getOfferById(this.offerId)
       .subscribe((result: BaseReponse) => {
         let object = result.object;

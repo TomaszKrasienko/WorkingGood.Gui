@@ -42,6 +42,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { OffersListForCompanyFiltersComponent } from './components/pages/offers/offers-list-for-company/offers-list-for-company-filters/offers-list-for-company-filters.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { EditOfferComponent } from './components/pages/offers/edit-offer/edit-offer.component';
+import { OffersListFiltersComponent } from './components/pages/offers/offers-list/offers-list-filters/offers-list-filters.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     OffersListEmptyComponent,
     OffersListForCompanyRow,
     OffersListForCompanyEmpty,
-    OffersListForCompanyFiltersComponent
+    OffersListForCompanyFiltersComponent,
+    EditOfferComponent,
+    OffersListFiltersComponent
   ],
   imports: [
     BrowserModule,

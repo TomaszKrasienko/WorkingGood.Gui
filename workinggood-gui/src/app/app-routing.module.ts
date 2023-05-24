@@ -12,6 +12,7 @@ import {OfferDetailsComponent} from "./components/pages/offers/offer-details/off
 import {OffersListComponent} from "./components/pages/offers/offers-list/offers-list.component";
 import {AddApplicationComponent} from "./components/pages/applications/add-application/add-application.component";
 import {ApplicationsListComponent} from "./components/pages/applications/applications-list/applications-list.component";
+import {EditOfferComponent} from "./components/pages/offers/edit-offer/edit-offer.component";
 
 const routes: Routes = [
   {path:"addCompany", component:NewCompanyComponent},
@@ -20,11 +21,14 @@ const routes: Routes = [
   {path:"login", component: LoginEmployeeComponent},
   {path:"registerCompany", component:RegisterCompanyComponent},
   {path:"afterRegister", component: AfterRegisterComponent},
+
   {path:"addOffer", component: AddOfferComponent},
   {path:"offersList", component: OffersListComponent},
   {path:"offersForCompany", component: OffersListForCompany},
   {path:"offer/:id", component: OfferDetailsComponent},
   {path:"offers", component: OffersListForCompany},
+  {path: "editOffer/:id", component: EditOfferComponent},
+
   {path:"addApplication/:offerId", component: AddApplicationComponent},
   {path:"applications/:offerId", component: ApplicationsListComponent}
 ];

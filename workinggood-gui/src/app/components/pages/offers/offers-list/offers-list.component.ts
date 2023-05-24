@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {OfferService} from "../../../services/offer/offer.service";
 import {Offer} from "../../../models/offer/offer";
-import {BaseReponse} from "../../../models/baseResponse";
-import {PaginationResponse} from "../../../models/paginationResponse";
 import {PageEvent} from "@angular/material/paginator";
+import {
+  MultiParamOffersFilters
+} from "../../../models/params/multiParamOutputFilers";
 
 @Component({
   selector: 'app-offers-list',
@@ -12,7 +13,7 @@ import {PageEvent} from "@angular/material/paginator";
 })
 export class OffersListComponent implements OnInit {
   offersList: Offer[] = [];
-
+  private _filters: MultiParamOffersFilters;
   length: number = 100;
   pageSize: number = 5;
   pageIndex: number = 0;
@@ -20,21 +21,23 @@ export class OffersListComponent implements OnInit {
   constructor(private offersService: OfferService) { }
 
   ngOnInit(): void {
-    this.getOffers();
+    this.setOffers();
   }
   handlePageEvent(event: PageEvent): void {
     this.pageSize = event.pageSize;
     console.log(this.pageSize);
     this.pageIndex = event.pageIndex;
     console.log(event.length);
-    this.getOffers();
+    this.setOffers(this._filters.rateFrom, this._filters.rateTo, this._filters.searchPhrase);
   }
-  private getOffers(): void {
-    this.offersService.getAllActiveOffers(this.pageIndex + 1, this.pageSize, true)
+  filterOffers(filter: MultiParamOffersFilters){
+    this._filters = filter;
+    this.setOffers(this._filters.rateFrom, this._filters.rateTo, this._filters.searchPhrase);
+  }
+  private setOffers(rateFrom?: number, rateTo?: number, searchPhrase?: string): void {
+    this.offersService.getAllActiveOffers(this.pageIndex + 1, this.pageSize, rateFrom, rateTo, searchPhrase)
       .subscribe((response) => {
       this.offersList = response.body;
-      // const paginationMetaData = response.headers.get('x-pagination');
-      // const pagination = JSON.parse(paginationMetaData);
       const pagination = this.offersService.getPaginationData(response.headers);
       this.length = pagination.totalCount;
     }, error => {
