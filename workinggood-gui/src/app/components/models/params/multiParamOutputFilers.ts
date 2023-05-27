@@ -1,4 +1,4 @@
-export interface MultiParaMOffersForCompanyFilters{
+export interface MultiParamOffersForCompanyFilters{
   isActive: boolean;
   authorOffers: boolean;
   rateFrom: number;

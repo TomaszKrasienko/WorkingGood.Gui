@@ -24,7 +24,7 @@ export class OffersListForCompanyRow implements OnInit {
   delete(): void {
     this.offerService.deleteOffer(this.offer.id).subscribe(
       (result:BaseReponse) => {
-        console.log(result);
+        window.location.reload();
       },
       (error: BaseReponse) => {
         console.log(error);

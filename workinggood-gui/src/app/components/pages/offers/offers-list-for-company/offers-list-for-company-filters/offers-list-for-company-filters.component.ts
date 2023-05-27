@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MultiParaMOffersForCompanyFilters} from "../../../../models/params/multiParamOutputFilers";
+import {MultiParamOffersForCompanyFilters} from "../../../../models/params/multiParamOutputFilers";
+import {FiltersService} from "../../../../services/filters/filters.service";
 
 @Component({
   selector: 'app-offers-list-for-company-filters',
@@ -7,7 +8,7 @@ import {MultiParaMOffersForCompanyFilters} from "../../../../models/params/multi
   styleUrls: ['./offers-list-for-company-filters.component.css']
 })
 export class OffersListForCompanyFiltersComponent implements OnInit {
-  @Output() multiParamsEventEmitter = new EventEmitter<MultiParaMOffersForCompanyFilters>();
+  @Output() multiParamsEventEmitter = new EventEmitter<MultiParamOffersForCompanyFilters>();
   searchPhrase: string = null;
   isActiveAnswers: any[] = [
     {name: 'Yes', value: true},
@@ -21,11 +22,20 @@ export class OffersListForCompanyFiltersComponent implements OnInit {
   authorOffers: boolean = this.authorOffersAnswers[0].value;
   rateFrom: string = null;
   rateTo: string = null;
-  constructor() { }
+  constructor(private filtersService: FiltersService) { }
 
   ngOnInit(): void {
+    this.setFilters();
   }
 
+  setFilters(): void{
+    let multiParaMOffersForCompanyFilters: MultiParamOffersForCompanyFilters = this.filtersService.getOffersCompanyFilters();
+    this.searchPhrase = multiParaMOffersForCompanyFilters.searchPhrase;
+    this.isActive = multiParaMOffersForCompanyFilters.isActive;
+    this.authorOffers = multiParaMOffersForCompanyFilters.authorOffers;
+    this.rateTo = multiParaMOffersForCompanyFilters.rateTo.toString();
+    this.rateFrom = multiParaMOffersForCompanyFilters.rateFrom.toString();
+  }
   filter(){
     this.handleMultiParamsEventEmitter();
   }
@@ -36,16 +46,18 @@ export class OffersListForCompanyFiltersComponent implements OnInit {
     this.authorOffers = null;
     this.rateFrom = null;
     this.rateTo = null;
+    this.filtersService.clearOffersCompanyFilters();
   }
 
   private handleMultiParamsEventEmitter(): void {
-    const multiParaMOffersForCompanyFilters: MultiParaMOffersForCompanyFilters = {
+    const multiParaMOffersForCompanyFilters: MultiParamOffersForCompanyFilters = {
       isActive: this.isActive,
       rateFrom: parseInt(this.rateFrom) ?? null,
       rateTo: parseInt(this.rateTo) ?? null,
       authorOffers: this.authorOffers,
       searchPhrase: this.searchPhrase
     }
+    this.filtersService.setOffersCompanyFilters(multiParaMOffersForCompanyFilters);
     this.multiParamsEventEmitter.emit(multiParaMOffersForCompanyFilters);
   }
 }

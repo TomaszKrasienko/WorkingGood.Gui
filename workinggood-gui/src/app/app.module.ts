@@ -44,7 +44,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { EditOfferComponent } from './components/pages/offers/edit-offer/edit-offer.component';
 import { OffersListFiltersComponent } from './components/pages/offers/offers-list/offers-list-filters/offers-list-filters.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +68,7 @@ import { OffersListFiltersComponent } from './components/pages/offers/offers-lis
     OffersListForCompanyEmpty,
     OffersListForCompanyFiltersComponent,
     EditOfferComponent,
-    OffersListFiltersComponent
+    OffersListFiltersComponent,
   ],
   imports: [
     BrowserModule,
